@@ -5,11 +5,12 @@ app.config['DEBUG'] = True
 
 @app.route('/')
 def index():
+    """ Initial get request at root, empty form """
     return render_template('signup2.html', title="Signup")
 
 @app.route('/', methods=['POST', 'GET'])
 def check_form():
-
+    """ Check validity of form, redirect to welcome page if no errors """
     # Put post requests into variables
     username = request.form['username']
     password = request.form['password']
@@ -47,6 +48,7 @@ def check_form():
 
 @app.route('/welcome')
 def welcome():
+    """ Display welcome page """
     username = request.args.get('username')
     return render_template('welcome.html', username=username)
 
@@ -58,6 +60,7 @@ def check_name(x):
     return True
 
 def check_email(x):
+    """ Check str 'x' for proper length and inclusion of @ . """
     if x == '':
         return True
     if x.count('@') == x.count('.') == 1 and check_name(x):
@@ -65,6 +68,7 @@ def check_email(x):
     return False
 
 def verify_pass(x,y):
+    """ Check if equal """
     return x == y
 
 
